@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- index.html v2.1 — puntengrid achtergrond, taalwisselbug opgelost -->
+<!-- index.html v2.2 — taalwisselbug definitief opgelost -->
 <!--
   STANDAARDTAAL INSTELLEN:
   Zoek op: const DEFAULT_LANG = 'en'
@@ -500,14 +500,21 @@ function applyLang(code) {
     if (t[key] !== undefined) el.textContent = t[key];
   });
 
-  /* Opties in calculator-selects apart hertalen, value bewaren */
+  /* Opties hertalen — taalknop (#langSelect) nooit aanraken */
+  /* Stap 1: bewaar huidige waarden van alle selects */
+  var selects = document.querySelectorAll('select[id]');
+  var savedVals = {};
+  selects.forEach(function(sel) { savedVals[sel.id] = sel.value; });
+
+  /* Stap 2: hertaal opties, sla taalknop over */
   document.querySelectorAll('select[id] option[data-i18n]').forEach(function(opt) {
+    if (opt.closest('#langSelect')) return;
     var key = opt.getAttribute('data-i18n');
-    var parent = opt.parentElement;
-    var savedVal = parent.value; /* waarde opslaan vóór hertaling */
     if (t[key] !== undefined) opt.textContent = t[key];
-    parent.value = savedVal; /* waarde terugzetten ná hertaling */
   });
+
+  /* Stap 3: zet alle select-waarden terug na hertaling */
+  selects.forEach(function(sel) { sel.value = savedVals[sel.id]; });
 
   /* HTML-attributen (bijv. voor <em> in h1) */
   document.querySelectorAll('[data-i18n-html]').forEach(function(el) {
