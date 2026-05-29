@@ -1,14 +1,14 @@
 /* ==============================================
    CenC — Hoofdstijlblad
-   style.css v1.0
+   style.css v1.1 — DM Sans hersteld, achtergrond-ovaal verwijderd
    Wijzig hier kleuren/fonts voor thema's en logo
    ============================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
 
 /* --- CSS VARIABELEN: LIGHT THEME (default) --- */
 :root {
-  --font-main: 'Jost', sans-serif;
+  --font-main: 'DM Sans', sans-serif;
   --font-mono: 'DM Mono', monospace;
 
   --bg-page:       #f7f7f5;
@@ -142,12 +142,7 @@ nav {
   position: relative; overflow: hidden;
   transition: background .3s;
 }
-.hero::before {
-  content: ''; position: absolute;
-  right: -5%; top: 15%; width: 55%; height: 70%;
-  background: var(--bg-secondary);
-  border-radius: 50% 40% 60% 30%; opacity: .5;
-}
+/* hero::before verwijderd — geen achtergrond-ovaal */
 .hero-inner {
   max-width: 1200px; margin: 0 auto;
   display: grid; grid-template-columns: 1fr 1fr;
