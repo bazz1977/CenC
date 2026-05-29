@@ -1,45 +1,65 @@
 /* ==============================================
    CenC — Hoofdstijlblad
-   style.css v1.1 — DM Sans hersteld, achtergrond-ovaal verwijderd
-   Wijzig hier kleuren/fonts voor thema's en logo
+   style.css v2.0
+   - Contourlijnen SVG achtergrondmotief
+   - Dark/light thema via CSS variabelen
+   - Font: DM Sans + DM Mono
+   Verander kleuren/fonts hier voor nieuwe thema's
    ============================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
 
-/* --- CSS VARIABELEN: LIGHT THEME (default) --- */
+/* -----------------------------------------------
+   THEMA VARIABELEN — light (standaard)
+   Alle kleuren staan hier centraal gedefinieerd
+----------------------------------------------- */
 :root {
-  --font-main: 'DM Sans', sans-serif;
-  --font-mono: 'DM Mono', monospace;
+  --font-main:  'DM Sans', sans-serif;
+  --font-mono:  'DM Mono', monospace;
 
+  /* Achtergronden */
   --bg-page:       #f7f7f5;
   --bg-primary:    #ffffff;
   --bg-secondary:  #eeecea;
   --bg-hero:       #f7f7f5;
 
+  /* Tekst */
   --text-primary:  #0d0d0d;
   --text-secondary:#8a8880;
   --text-muted:    #c8c6c0;
 
+  /* Randen */
   --border:        #c8c6c0;
   --border-light:  #eeecea;
 
+  /* Accent (goud) */
   --accent:        #d4a853;
   --accent-light:  #fdf3dc;
 
+  /* Knoppen */
   --btn-bg:        #0d0d0d;
   --btn-text:      #ffffff;
 
+  /* Navigatie */
   --nav-bg:        rgba(255,255,255,0.95);
+
+  /* Roadmap sectie (altijd donker) */
   --roadmap-bg:    #0d0d0d;
   --roadmap-text:  #ffffff;
   --roadmap-muted: rgba(255,255,255,0.45);
   --roadmap-border:rgba(255,255,255,0.1);
 
+  /* Contourlijn motief — lichte modus */
+  --contour-color: rgba(180,170,155,0.35);
+
   --radius:    8px;
   --radius-lg: 14px;
 }
 
-/* --- CSS VARIABELEN: DARK THEME --- */
+/* -----------------------------------------------
+   THEMA VARIABELEN — dark
+   Wissel data-theme="dark" op <html> om te activeren
+----------------------------------------------- */
 [data-theme="dark"] {
   --bg-page:       #111111;
   --bg-primary:    #1a1a1a;
@@ -60,16 +80,35 @@
   --btn-text:      #0d0d0d;
 
   --nav-bg:        rgba(17,17,17,0.95);
-  --roadmap-bg:    #0d0d0d;
-  --roadmap-text:  #f0ede8;
-  --roadmap-muted: rgba(240,237,232,0.4);
-  --roadmap-border:rgba(255,255,255,0.08);
+
+  /* Contourlijn motief — donkere modus */
+  --contour-color: rgba(255,220,140,0.07);
 }
 
-/* --- RESET --- */
+/* -----------------------------------------------
+   CONTOURLIJNEN ACHTERGROND
+   Inline SVG als data-URL — geen extra bestand nodig
+   Zachte topografische lijnen, CNC-diepte gevoel
+----------------------------------------------- */
+.contour-bg {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Cdefs%3E%3Cstyle%3Epath%7Bfill:none;stroke-width:0.8%7D%3C/style%3E%3C/defs%3E%3Cg opacity='1'%3E%3Cellipse cx='400' cy='300' rx='380' ry='270' stroke='%23b4aa9b' opacity='0.18'/%3E%3Cellipse cx='400' cy='300' rx='330' ry='225' stroke='%23b4aa9b' opacity='0.16'/%3E%3Cellipse cx='400' cy='300' rx='280' ry='182' stroke='%23b4aa9b' opacity='0.14'/%3E%3Cellipse cx='400' cy='300' rx='230' ry='142' stroke='%23b4aa9b' opacity='0.13'/%3E%3Cellipse cx='400' cy='300' rx='180' ry='105' stroke='%23b4aa9b' opacity='0.12'/%3E%3Cellipse cx='400' cy='300' rx='130' ry='72' stroke='%23b4aa9b' opacity='0.10'/%3E%3Cellipse cx='400' cy='300' rx='82' ry='43' stroke='%23b4aa9b' opacity='0.09'/%3E%3Cellipse cx='400' cy='300' rx='40' ry='18' stroke='%23b4aa9b' opacity='0.07'/%3E%3Cellipse cx='120' cy='80' rx='200' ry='140' stroke='%23b4aa9b' opacity='0.10'/%3E%3Cellipse cx='120' cy='80' rx='155' ry='105' stroke='%23b4aa9b' opacity='0.09'/%3E%3Cellipse cx='120' cy='80' rx='110' ry='72' stroke='%23b4aa9b' opacity='0.08'/%3E%3Cellipse cx='120' cy='80' rx='68' ry='43' stroke='%23b4aa9b' opacity='0.07'/%3E%3Cellipse cx='680' cy='520' rx='220' ry='150' stroke='%23b4aa9b' opacity='0.10'/%3E%3Cellipse cx='680' cy='520' rx='170' ry='112' stroke='%23b4aa9b' opacity='0.09'/%3E%3Cellipse cx='680' cy='520' rx='120' ry='76' stroke='%23b4aa9b' opacity='0.08'/%3E%3Cellipse cx='680' cy='520' rx='72' ry='44' stroke='%23b4aa9b' opacity='0.07'/%3E%3Cellipse cx='650' cy='80' rx='160' ry='100' stroke='%23b4aa9b' opacity='0.09'/%3E%3Cellipse cx='650' cy='80' rx='115' ry='70' stroke='%23b4aa9b' opacity='0.08'/%3E%3Cellipse cx='650' cy='80' rx='70' ry='42' stroke='%23b4aa9b' opacity='0.07'/%3E%3Cellipse cx='100' cy='480' rx='150' ry='100' stroke='%23b4aa9b' opacity='0.09'/%3E%3Cellipse cx='100' cy='480' rx='105' ry='68' stroke='%23b4aa9b' opacity='0.08'/%3E%3Cellipse cx='100' cy='480' rx='62' ry='38' stroke='%23b4aa9b' opacity='0.07'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 800px 600px;
+}
+
+/* Dark mode: andere SVG kleur via filter */
+[data-theme="dark"] .contour-bg {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Cdefs%3E%3Cstyle%3Epath%7Bfill:none;stroke-width:0.8%7D%3C/style%3E%3C/defs%3E%3Cg opacity='1'%3E%3Cellipse cx='400' cy='300' rx='380' ry='270' stroke='%23d4a853' opacity='0.07'/%3E%3Cellipse cx='400' cy='300' rx='330' ry='225' stroke='%23d4a853' opacity='0.065'/%3E%3Cellipse cx='400' cy='300' rx='280' ry='182' stroke='%23d4a853' opacity='0.06'/%3E%3Cellipse cx='400' cy='300' rx='230' ry='142' stroke='%23d4a853' opacity='0.055'/%3E%3Cellipse cx='400' cy='300' rx='180' ry='105' stroke='%23d4a853' opacity='0.05'/%3E%3Cellipse cx='400' cy='300' rx='130' ry='72' stroke='%23d4a853' opacity='0.045'/%3E%3Cellipse cx='400' cy='300' rx='82' ry='43' stroke='%23d4a853' opacity='0.04'/%3E%3Cellipse cx='400' cy='300' rx='40' ry='18' stroke='%23d4a853' opacity='0.03'/%3E%3Cellipse cx='120' cy='80' rx='200' ry='140' stroke='%23d4a853' opacity='0.05'/%3E%3Cellipse cx='120' cy='80' rx='155' ry='105' stroke='%23d4a853' opacity='0.045'/%3E%3Cellipse cx='120' cy='80' rx='110' ry='72' stroke='%23d4a853' opacity='0.04'/%3E%3Cellipse cx='120' cy='80' rx='68' ry='43' stroke='%23d4a853' opacity='0.03'/%3E%3Cellipse cx='680' cy='520' rx='220' ry='150' stroke='%23d4a853' opacity='0.05'/%3E%3Cellipse cx='680' cy='520' rx='170' ry='112' stroke='%23d4a853' opacity='0.045'/%3E%3Cellipse cx='680' cy='520' rx='120' ry='76' stroke='%23d4a853' opacity='0.04'/%3E%3Cellipse cx='680' cy='520' rx='72' ry='44' stroke='%23d4a853' opacity='0.03'/%3E%3Cellipse cx='650' cy='80' rx='160' ry='100' stroke='%23d4a853' opacity='0.045'/%3E%3Cellipse cx='650' cy='80' rx='115' ry='70' stroke='%23d4a853' opacity='0.04'/%3E%3Cellipse cx='650' cy='80' rx='70' ry='42' stroke='%23d4a853' opacity='0.03'/%3E%3Cellipse cx='100' cy='480' rx='150' ry='100' stroke='%23d4a853' opacity='0.045'/%3E%3Cellipse cx='100' cy='480' rx='105' ry='68' stroke='%23d4a853' opacity='0.04'/%3E%3Cellipse cx='100' cy='480' rx='62' ry='38' stroke='%23d4a853' opacity='0.03'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* -----------------------------------------------
+   RESET
+----------------------------------------------- */
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
-/* --- BASE --- */
+/* -----------------------------------------------
+   BASE TYPOGRAFIE & BODY
+----------------------------------------------- */
 body {
   font-family: var(--font-main);
   background: var(--bg-page);
@@ -84,7 +123,9 @@ h1 { font-size: clamp(2.4rem,5vw,4rem); font-weight: 300; line-height: 1.1; lett
 h2 { font-size: clamp(1.6rem,3vw,2.2rem); font-weight: 300; letter-spacing: -0.02em; }
 h3 { font-size: 1.1rem; font-weight: 500; }
 
-/* --- NAV --- */
+/* -----------------------------------------------
+   NAVIGATIE
+----------------------------------------------- */
 nav {
   position: sticky; top: 0; z-index: 100;
   background: var(--nav-bg);
@@ -109,22 +150,41 @@ nav {
   text-decoration: none; letter-spacing: .02em; transition: color .2s;
 }
 .nav-links a:hover { color: var(--text-primary); }
-.nav-right { display: flex; align-items: center; gap: .75rem; }
 
-/* Theme toggle button */
+/* Rechts in nav: taalknop + themaknop + CTA */
+.nav-right { display: flex; align-items: center; gap: .6rem; }
+
+/* Taalknop — dropdown */
+.lang-select {
+  background: transparent;
+  border: 0.5px solid var(--border);
+  color: var(--text-secondary);
+  padding: .3rem .6rem;
+  border-radius: var(--radius);
+  font-family: var(--font-mono);
+  font-size: .75rem;
+  cursor: pointer;
+  outline: none;
+  transition: border-color .2s, color .2s;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.lang-select:hover { border-color: var(--text-primary); color: var(--text-primary); }
+
+/* Thema-toggle knop (🌙/☀️) */
 .theme-toggle {
   background: transparent;
   border: 0.5px solid var(--border);
   color: var(--text-secondary);
   width: 36px; height: 36px;
   border-radius: var(--radius);
-  cursor: pointer;
-  font-size: 1rem;
+  cursor: pointer; font-size: 1rem;
   display: flex; align-items: center; justify-content: center;
   transition: border-color .2s, color .2s;
 }
 .theme-toggle:hover { border-color: var(--text-primary); color: var(--text-primary); }
 
+/* Primaire CTA knop nav */
 .nav-cta {
   background: var(--btn-bg); color: var(--btn-text);
   border: none; padding: .55rem 1.2rem;
@@ -134,7 +194,9 @@ nav {
 }
 .nav-cta:hover { opacity: .8; }
 
-/* --- HERO --- */
+/* -----------------------------------------------
+   HERO SECTIE
+----------------------------------------------- */
 .hero {
   min-height: 88vh; display: flex; align-items: center;
   padding: 5rem 2rem 4rem;
@@ -142,11 +204,10 @@ nav {
   position: relative; overflow: hidden;
   transition: background .3s;
 }
-/* hero::before verwijderd — geen achtergrond-ovaal */
 .hero-inner {
   max-width: 1200px; margin: 0 auto;
   display: grid; grid-template-columns: 1fr 1fr;
-  gap: 4rem; align-items: center; position: relative;
+  gap: 4rem; align-items: center; position: relative; z-index: 1;
 }
 .hero-sub {
   font-family: var(--font-mono); font-size: .78rem;
@@ -157,10 +218,10 @@ nav {
 .hero-desc { color: var(--text-secondary); margin: 1.5rem 0 2.5rem; font-size: 1rem; max-width: 38ch; }
 .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
 
+/* Knoppen */
 .btn-primary {
   background: var(--btn-bg); color: var(--btn-text);
-  border: none; padding: .8rem 1.8rem;
-  border-radius: var(--radius);
+  border: none; padding: .8rem 1.8rem; border-radius: var(--radius);
   font-family: var(--font-main); font-size: .9rem;
   cursor: pointer; transition: opacity .2s;
   text-decoration: none; display: inline-block;
@@ -176,7 +237,7 @@ nav {
 }
 .btn-secondary:hover { border-color: var(--text-primary); }
 
-/* Machine card */
+/* Machine-informatiekaart in hero */
 .hero-machine {
   background: var(--bg-primary); border: 0.5px solid var(--border);
   border-radius: var(--radius-lg); padding: 2rem;
@@ -192,7 +253,9 @@ nav {
 .machine-materials { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .5rem; }
 .mat-pill { font-size: .78rem; background: var(--bg-secondary); color: var(--text-secondary); padding: .3rem .8rem; border-radius: 20px; }
 
-/* --- SECTIONS --- */
+/* -----------------------------------------------
+   SECTIES — algemeen
+----------------------------------------------- */
 section { padding: 6rem 2rem; background: var(--bg-page); transition: background .3s; }
 .section-inner { max-width: 1200px; margin: 0 auto; }
 .section-label {
@@ -201,7 +264,9 @@ section { padding: 6rem 2rem; background: var(--bg-page); transition: background
   text-transform: uppercase; margin-bottom: 1rem;
 }
 
-/* --- DIENSTEN --- */
+/* -----------------------------------------------
+   DIENSTEN RASTER
+----------------------------------------------- */
 .services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 3rem; }
 .service-card {
   background: var(--bg-primary);
@@ -213,7 +278,9 @@ section { padding: 6rem 2rem; background: var(--bg-page); transition: background
 .service-card h3 { margin-bottom: .6rem; }
 .service-card p { color: var(--text-secondary); font-size: .9rem; }
 
-/* --- PORTFOLIO --- */
+/* -----------------------------------------------
+   PORTFOLIO RASTER
+----------------------------------------------- */
 .portfolio-section { background: var(--bg-secondary) !important; }
 .portfolio-grid {
   display: grid; grid-template-columns: repeat(3,1fr);
@@ -225,6 +292,7 @@ section { padding: 6rem 2rem; background: var(--bg-page); transition: background
   position: relative; overflow: hidden; transition: background .2s;
 }
 .portfolio-item:hover { background: var(--bg-secondary); }
+/* Gouden lijn animatie onderaan elke portfolio-kaart */
 .portfolio-item::after {
   content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
   background: var(--accent); transform: scaleX(0);
@@ -236,8 +304,9 @@ section { padding: 6rem 2rem; background: var(--bg-page); transition: background
 .portfolio-item p { color: var(--text-secondary); font-size: .85rem; }
 .portfolio-mat { font-family: var(--font-mono); font-size: .72rem; color: var(--accent); margin-top: .75rem; }
 
-/* --- CALCULATOR --- */
-.calculator-section { border-top: 0.5px solid var(--border-light); }
+/* -----------------------------------------------
+   PRIJSCALCULATOR
+----------------------------------------------- */
 .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 3rem; align-items: start; }
 .form-group { margin-bottom: 1.25rem; }
 .form-label { font-size: .82rem; color: var(--text-secondary); font-weight: 500; margin-bottom: .4rem; display: block; }
@@ -251,6 +320,8 @@ section { padding: 6rem 2rem; background: var(--bg-page); transition: background
 }
 .form-input:focus, .form-select:focus { border-color: var(--text-primary); }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+/* Prijsresultaat kaart */
 .price-result {
   background: var(--bg-secondary); border: 0.5px solid var(--border);
   border-radius: var(--radius-lg); padding: 2rem;
@@ -269,19 +340,25 @@ section { padding: 6rem 2rem; background: var(--bg-page); transition: background
 }
 .price-total .big-price { font-family: var(--font-mono); font-size: 1.8rem; font-weight: 500; }
 .price-note { font-size: .75rem; opacity: .5; margin-top: .4rem; }
+
+/* -----------------------------------------------
+   SCHETS UPLOAD SECTIE
+----------------------------------------------- */
+.upload-section { background: var(--bg-secondary) !important; }
+.upload-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 3rem; align-items: start; }
+
+/* Upload dropzone */
 .upload-zone {
   border: 1.5px dashed var(--border); border-radius: var(--radius);
   padding: 2rem; text-align: center; cursor: pointer;
-  transition: border-color .2s; background: var(--bg-secondary);
+  transition: border-color .2s; background: var(--bg-page);
 }
 .upload-zone:hover { border-color: var(--accent); }
 .upload-zone i { font-size: 2rem; color: var(--text-muted); display: block; margin-bottom: .5rem; }
 .upload-zone p { color: var(--text-secondary); font-size: .85rem; }
 .upload-zone small { font-size: .75rem; color: var(--text-muted); }
 
-/* --- SCHETS UPLOAD --- */
-.upload-section { background: var(--bg-secondary) !important; }
-.upload-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 3rem; align-items: start; }
+/* Stappenlijst voor schets-proces */
 .upload-steps { list-style: none; display: flex; flex-direction: column; gap: 1.25rem; margin-top: 2rem; }
 .upload-steps li { display: flex; gap: 1rem; align-items: flex-start; }
 .step-num {
@@ -295,12 +372,16 @@ section { padding: 6rem 2rem; background: var(--bg-page); transition: background
 .step-text h4 { font-size: .9rem; font-weight: 500; }
 .step-text p { font-size: .82rem; color: var(--text-secondary); margin-top: .2rem; }
 
-/* --- OVER ONS --- */
+/* -----------------------------------------------
+   OVER ONS SECTIE
+----------------------------------------------- */
 .over-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
 .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2.5rem; }
 .stat-box { border-left: 2px solid var(--accent); padding-left: 1rem; }
 .stat-num { font-size: 2rem; font-weight: 300; line-height: 1; }
 .stat-lbl { font-size: .8rem; color: var(--text-secondary); margin-top: .25rem; }
+
+/* Contactkaart */
 .contact-card {
   background: var(--bg-secondary); border: 0.5px solid var(--border);
   border-radius: var(--radius-lg); padding: 2.5rem;
@@ -312,7 +393,9 @@ section { padding: 6rem 2rem; background: var(--bg-page); transition: background
 .contact-lbl { font-size: .78rem; color: var(--text-secondary); }
 .contact-val { font-size: .9rem; font-weight: 500; }
 
-/* --- ROADMAP --- */
+/* -----------------------------------------------
+   ROADMAP SECTIE — altijd donkere achtergrond
+----------------------------------------------- */
 .roadmap-section { background: var(--roadmap-bg) !important; transition: background .3s; }
 .roadmap-section .section-label { color: var(--accent); }
 .roadmap-section h2 { color: var(--roadmap-text); }
@@ -322,6 +405,7 @@ section { padding: 6rem 2rem; background: var(--bg-page); transition: background
   border-radius: var(--radius-lg); padding: 1.75rem;
   position: relative; overflow: hidden;
 }
+/* Gouden lijn animatie bovenkant roadmap-kaart */
 .roadmap-card::before {
   content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
   background: var(--accent); transform: scaleX(0);
@@ -335,7 +419,9 @@ section { padding: 6rem 2rem; background: var(--bg-page); transition: background
 .status-open { background: rgba(212,168,83,.15); color: var(--accent); }
 .status-research { background: rgba(255,255,255,.05); color: rgba(255,255,255,.4); }
 
-/* --- FOOTER --- */
+/* -----------------------------------------------
+   FOOTER
+----------------------------------------------- */
 footer {
   background: var(--bg-secondary) !important; border-top: 0.5px solid var(--border-light);
   padding: 3rem 2rem; text-align: center; transition: background .3s;
@@ -345,21 +431,28 @@ footer {
 .footer-logo span { color: var(--accent); }
 footer p { font-size: .82rem; color: var(--text-secondary); }
 
-/* --- ACTIEPUNTENLIJST (intern gebruik) ---
-   TODO: Noors (no) vertaling toevoegen
-   TODO: Engels (en) vertaling toevoegen
-   TODO: CSS split naar thema-bestanden (bijv. theme-light.css, theme-dark.css)
-   TODO: Logo-wisseling implementeren (data-theme attribuut)
-*/
+/* -----------------------------------------------
+   ACTIEPUNTEN (intern — niet zichtbaar op site)
+   TODO: CSS splitsen naar theme-light.css / theme-dark.css
+   TODO: Logo-wisseling per thema implementeren
+----------------------------------------------- */
 
-/* --- RESPONSIVE --- */
+/* -----------------------------------------------
+   RESPONSIVE — tablet & mobiel
+----------------------------------------------- */
 @media(max-width:900px){
-  .hero-inner, .services-grid, .portfolio-grid,
-  .calc-grid, .over-grid, .roadmap-grid, .upload-grid { grid-template-columns: 1fr; }
+  .hero-inner, .services-grid, .calc-grid,
+  .over-grid, .upload-grid { grid-template-columns: 1fr; }
+
+  /* Portfolio als losse kaarten op mobiel */
   .portfolio-grid { border: none; display: flex; flex-direction: column; gap: .5rem; }
   .portfolio-item { border: 0.5px solid var(--border); border-radius: var(--radius); }
-  .nav-links { display: none; }
+
+  /* Roadmap: 2 kolommen op tablet */
   .roadmap-grid { grid-template-columns: 1fr 1fr; }
+
+  /* Nav-links verbergen op mobiel */
+  .nav-links { display: none; }
 }
 @media(max-width:600px){
   .roadmap-grid { grid-template-columns: 1fr; }

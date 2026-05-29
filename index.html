@@ -1,469 +1,625 @@
 <!DOCTYPE html>
-<!-- index.html v1.2 — DM Sans hersteld, ovaal verwijderd via style.css v1.1 -->
-<html lang="nl" data-theme="light">
+<!-- index.html v2.0 — meertalig (EN/NL/NO), dark theme, contourlijnen achtergrond -->
+<!--
+  STANDAARDTAAL INSTELLEN:
+  Zoek op: const DEFAULT_LANG = 'en'
+  Verander 'en' naar 'nl' of 'no'
+
+  TAAL VERWIJDEREN:
+  1. Verwijder de bijbehorende <script src="lang/xx.js"> regel onderaan
+  2. Verwijder de <option value="xx"> in de taalknop
+-->
+<html lang="en" data-theme="light">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CenC — CNC Bewerkingen Gardemoen</title>
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CenC — CNC Machining Gardermoen</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 </head>
 <body>
 
+<!-- ==================== NAVIGATIE ==================== -->
 <nav>
   <div class="nav-inner">
     <a href="#" class="nav-logo">CenC<span>.</span></a>
+
     <ul class="nav-links">
-      <li><a href="#diensten">Diensten</a></li>
-      <li><a href="#portfolio">Portfolio</a></li>
-      <li><a href="#prijs">Prijscalculator</a></li>
-      <li><a href="#schets">Schets aanleveren</a></li>
-      <li><a href="#over">Over ons</a></li>
+      <li><a href="#services"  data-i18n="nav_services">Services</a></li>
+      <li><a href="#portfolio" data-i18n="nav_portfolio">Portfolio</a></li>
+      <li><a href="#price"     data-i18n="nav_calculator">Price calculator</a></li>
+      <li><a href="#sketch"    data-i18n="nav_sketch">Submit sketch</a></li>
+      <li><a href="#about"     data-i18n="nav_about">About us</a></li>
     </ul>
+
     <div class="nav-right">
-      <button class="theme-toggle" id="themeToggle" aria-label="Schakel thema">🌙</button>
-      <button class="nav-cta" onclick="document.getElementById('prijs').scrollIntoView({behavior:'smooth'})">Bereken prijs</button>
+      <!-- Taalknop: om een taal te verwijderen, verwijder de <option> hieronder -->
+      <select class="lang-select" id="langSelect" aria-label="Language">
+        <option value="en">EN</option>
+        <option value="nl">NL</option>
+        <option value="no">NO</option>
+      </select>
+
+      <!-- Thema-toggle knop -->
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+
+      <!-- CTA knop -->
+      <button class="nav-cta" onclick="document.getElementById('price').scrollIntoView({behavior:'smooth'})"
+              data-i18n="nav_cta">Get a quote</button>
     </div>
   </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
+<!-- ==================== HERO ==================== -->
+<!-- Contourlijn achtergrond toegepast via .contour-bg klasse -->
+<section class="hero contour-bg">
   <div class="hero-inner">
+
     <div>
-      <p class="hero-sub">Multicam 3000 · Gardemoen regio</p>
-      <h1>Precisie-<em>frezen</em><br>op maat</h1>
-      <p class="hero-desc">CNC-bewerkingen voor hout, aluminium en kunststof. Van schets tot eindproduct — snel, nauwkeurig, lokaal bezorgd.</p>
+      <p class="hero-sub" data-i18n="hero_sub">Multicam 3000 · Gardermoen region</p>
+      <h1 data-i18n-html="hero_h1">Precision <em>milling</em><br>to order</h1>
+      <p class="hero-desc" data-i18n="hero_desc">CNC machining for wood, aluminium and plastics.</p>
       <div class="hero-btns">
-        <a href="#prijs" class="btn-primary">Bereken offerte</a>
-        <a href="#portfolio" class="btn-secondary">Bekijk portfolio</a>
+        <a href="#price"     class="btn-primary"   data-i18n="hero_btn1">Calculate quote</a>
+        <a href="#portfolio" class="btn-secondary"  data-i18n="hero_btn2">View portfolio</a>
       </div>
     </div>
+
+    <!-- Machine-specs kaart -->
     <div class="hero-machine">
       <div>
-        <p class="machine-tag">Productieapparaat</p>
-        <p class="machine-name">Multicam 3000</p>
+        <p class="machine-tag"  data-i18n="machine_tag">Machine</p>
+        <p class="machine-name" data-i18n="machine_name">Multicam 3000</p>
       </div>
       <div class="machine-specs">
         <div class="spec-item">
-          <p class="spec-label">Tafelafmeting</p>
+          <p class="spec-label" data-i18n="spec_table">Table size</p>
           <p class="spec-val">2440 × 1220 mm</p>
         </div>
         <div class="spec-item">
-          <p class="spec-label">Z-slag</p>
+          <p class="spec-label" data-i18n="spec_z">Z travel</p>
           <p class="spec-val">200 mm</p>
         </div>
         <div class="spec-item">
-          <p class="spec-label">Snelheid</p>
+          <p class="spec-label" data-i18n="spec_speed">Speed</p>
           <p class="spec-val">25 m/min</p>
         </div>
         <div class="spec-item">
-          <p class="spec-label">Spindel</p>
-          <p class="spec-val">10 pk / 18.000 rpm</p>
+          <p class="spec-label" data-i18n="spec_spindle">Spindle</p>
+          <p class="spec-val">10 hp / 18,000 rpm</p>
         </div>
       </div>
       <div>
-        <p class="machine-tag">Materialen</p>
+        <p class="machine-tag" data-i18n="machine_mats">Materials</p>
         <div class="machine-materials">
-          <span class="mat-pill">Hout / MDF</span>
-          <span class="mat-pill">Aluminium</span>
-          <span class="mat-pill">Kunststof / acryl</span>
+          <span class="mat-pill" data-i18n="calc_mat1">Wood / MDF</span>
+          <span class="mat-pill" data-i18n="calc_mat2">Aluminium</span>
+          <span class="mat-pill" data-i18n="calc_mat3">Plastics / acrylic</span>
         </div>
       </div>
     </div>
+
   </div>
 </section>
 
-<!-- DIENSTEN -->
-<section id="diensten">
+<!-- ==================== DIENSTEN ==================== -->
+<section id="services" class="contour-bg">
   <div class="section-inner">
-    <p class="section-label">Wat wij doen</p>
-    <h2>CNC-diensten & services</h2>
+    <p class="section-label" data-i18n="services_label">What we do</p>
+    <h2 data-i18n="services_h2">CNC services</h2>
     <div class="services-grid">
+
       <div class="service-card">
-        <div class="service-icon"><i class="ti ti-tool"></i></div>
-        <h3>CNC-frezen op maat</h3>
-        <p>Gerichte bewerkingen op de Multicam 3000. Van enkelstuks prototypes tot kleine series. Hout, MDF, aluminium en kunststof.</p>
+        <div class="service-icon"><i class="ti ti-tool" aria-hidden="true"></i></div>
+        <h3 data-i18n="svc1_h">Custom CNC milling</h3>
+        <p  data-i18n="svc1_p">Targeted operations on the Multicam 3000.</p>
       </div>
       <div class="service-card">
-        <div class="service-icon"><i class="ti ti-vector"></i></div>
-        <h3>Tekenhulp & CAM-voorbereiding</h3>
-        <p>Jouw schets of idee omzetten naar een machinaal bestand. Wij helpen bij DXF, G-code en CAM-instellingen — ook voor beginners.</p>
+        <div class="service-icon"><i class="ti ti-vector" aria-hidden="true"></i></div>
+        <h3 data-i18n="svc2_h">Drawing support & CAM prep</h3>
+        <p  data-i18n="svc2_p">We convert your sketch into a machine file.</p>
       </div>
       <div class="service-card">
-        <div class="service-icon"><i class="ti ti-truck-delivery"></i></div>
-        <h3>Kleine bezorgservice</h3>
-        <p>Lokale bezorging in de regio Gardemoen. Snel, flexibel en persoonlijk — geen grote logistieke overhead.</p>
+        <div class="service-icon"><i class="ti ti-truck-delivery" aria-hidden="true"></i></div>
+        <h3 data-i18n="svc3_h">Small delivery service</h3>
+        <p  data-i18n="svc3_p">Local delivery in the Gardermoen region.</p>
       </div>
       <div class="service-card">
-        <div class="service-icon"><i class="ti ti-cut"></i></div>
-        <h3>Standaard freeswerk</h3>
-        <p>Veelgevraagde bewerkingen zoals uitzagen, graveren, kantfrezen en pocketfrezen. Snelle doorlooptijd voor standaard klussen.</p>
+        <div class="service-icon"><i class="ti ti-cut" aria-hidden="true"></i></div>
+        <h3 data-i18n="svc4_h">Standard milling work</h3>
+        <p  data-i18n="svc4_p">Common operations with quick turnaround.</p>
       </div>
       <div class="service-card">
-        <div class="service-icon"><i class="ti ti-settings-2"></i></div>
-        <h3>Maatwerk & prototyping</h3>
-        <p>Unieke onderdelen voor industrie, interieur of productontwikkeling. Wij denken mee van concept tot klaar product.</p>
+        <div class="service-icon"><i class="ti ti-settings-2" aria-hidden="true"></i></div>
+        <h3 data-i18n="svc5_h">Custom work & prototyping</h3>
+        <p  data-i18n="svc5_p">Unique parts from concept to finished product.</p>
       </div>
       <div class="service-card">
-        <div class="service-icon"><i class="ti ti-file-check"></i></div>
-        <h3>Bestand-check & optimalisatie</h3>
-        <p>Klaar bestand maar twijfels? Wij controleren jouw DXF of STL op freesbaarbaarheid en passen aan waar nodig.</p>
+        <div class="service-icon"><i class="ti ti-file-check" aria-hidden="true"></i></div>
+        <h3 data-i18n="svc6_h">File check & optimisation</h3>
+        <p  data-i18n="svc6_p">We check your DXF or STL for machinability.</p>
       </div>
+
     </div>
   </div>
 </section>
 
-<!-- PORTFOLIO -->
+<!-- ==================== PORTFOLIO ==================== -->
 <section id="portfolio" class="portfolio-section">
   <div class="section-inner">
-    <p class="section-label">Eerder werk</p>
-    <h2>Portfolio</h2>
+    <p class="section-label" data-i18n="portfolio_label">Previous work</p>
+    <h2 data-i18n="portfolio_h2">Portfolio</h2>
     <div class="portfolio-grid">
+
       <div class="portfolio-item">
         <p class="portfolio-num">001</p>
-        <h3>Decoratieve wandpanelen</h3>
-        <p>Gegraveerde MDF-panelen voor een horecagelegenheid. Serie van 12 stuks, uniek patroon per paneel.</p>
-        <p class="portfolio-mat">MDF · Graveren · Serie</p>
+        <h3 data-i18n="p1_h">Decorative wall panels</h3>
+        <p  data-i18n="p1_p">Engraved MDF panels for a hospitality venue.</p>
+        <p class="portfolio-mat" data-i18n="p1_m">MDF · Engraving · Series</p>
       </div>
       <div class="portfolio-item">
         <p class="portfolio-num">002</p>
-        <h3>Aluminium behuizing</h3>
-        <p>Maatwerk behuizing voor industriële sensor-unit. Tolerantie ±0.1mm, anodiseerklaar oppervlak.</p>
-        <p class="portfolio-mat">Aluminium · Pocketfrezen · Prototype</p>
+        <h3 data-i18n="p2_h">Aluminium housing</h3>
+        <p  data-i18n="p2_p">Custom housing for an industrial sensor unit.</p>
+        <p class="portfolio-mat" data-i18n="p2_m">Aluminium · Pocketing · Prototype</p>
       </div>
       <div class="portfolio-item">
         <p class="portfolio-num">003</p>
-        <h3>Acryl display-standaard</h3>
-        <p>Transparante standaard voor productpresentatie. Laserhelder acryl, strakke snijkanten.</p>
-        <p class="portfolio-mat">Acryl · Uitsnijden · Klein-serie</p>
+        <h3 data-i18n="p3_h">Acrylic display stand</h3>
+        <p  data-i18n="p3_p">Transparent stand for product presentation.</p>
+        <p class="portfolio-mat" data-i18n="p3_m">Acrylic · Profiling · Small series</p>
       </div>
       <div class="portfolio-item">
         <p class="portfolio-num">004</p>
-        <h3>Houten zaagmallen</h3>
-        <p>Nauwkeurige freesmallen voor herhaalde productie in timmerwerk. FSC multiplex, 15mm.</p>
-        <p class="portfolio-mat">Multiplex · Contourfrees · Maatwerk</p>
+        <h3 data-i18n="p4_h">Wooden jigs</h3>
+        <p  data-i18n="p4_p">Precision milling jigs for repeated production.</p>
+        <p class="portfolio-mat" data-i18n="p4_m">Plywood · Contour · Custom</p>
       </div>
       <div class="portfolio-item">
         <p class="portfolio-num">005</p>
-        <h3>Gevellettering</h3>
-        <p>3D-letters uit PVC-schuimplaat voor gevelreclame. Dikte 20mm, gespoten in RAL-kleur.</p>
-        <p class="portfolio-mat">PVC-foam · 3D-frees · Reclame</p>
+        <h3 data-i18n="p5_h">Facade lettering</h3>
+        <p  data-i18n="p5_p">3D letters from PVC foam sheet for signage.</p>
+        <p class="portfolio-mat" data-i18n="p5_m">PVC foam · 3D milling · Signage</p>
       </div>
       <div class="portfolio-item">
         <p class="portfolio-num">006</p>
-        <h3>Interieur inlegwerk</h3>
-        <p>Sierelementen voor een meubelmaker — inlegpatronen in eikenhout op 0.5mm nauwkeurig.</p>
-        <p class="portfolio-mat">Eiken · Inlegfrees · Interieur</p>
+        <h3 data-i18n="p6_h">Interior inlay work</h3>
+        <p  data-i18n="p6_p">Decorative elements for a furniture maker.</p>
+        <p class="portfolio-mat" data-i18n="p6_m">Oak · Inlay milling · Interior</p>
       </div>
+
     </div>
   </div>
 </section>
 
-<!-- PRIJSCALCULATOR -->
-<section id="prijs">
+<!-- ==================== PRIJSCALCULATOR ==================== -->
+<section id="price" class="contour-bg">
   <div class="section-inner">
-    <p class="section-label">Prijsindicatie</p>
-    <h2>Online rekentool</h2>
-    <p style="color:var(--text-secondary);margin-top:.75rem;font-size:.9rem">Geef je opdracht in en ontvang direct een indicatieve prijs. Geen registratie nodig.</p>
+    <p class="section-label" data-i18n="calc_label">Price estimate</p>
+    <h2 data-i18n="calc_h2">Online price tool</h2>
+    <p style="color:var(--text-secondary);margin-top:.75rem;font-size:.9rem" data-i18n="calc_intro">
+      Enter your job details and get an instant indicative price.
+    </p>
+
     <div class="calc-grid">
+      <!-- Invoervelden -->
       <div>
         <div class="form-group">
-          <label class="form-label">Materiaal</label>
+          <label class="form-label" data-i18n="calc_mat">Material</label>
           <select class="form-select" id="mat" onchange="calcPrice()">
-            <option value="mdf">Hout / MDF</option>
-            <option value="alu">Aluminium</option>
-            <option value="pla">Kunststof / acryl</option>
+            <option value="mdf" data-i18n="calc_mat1">Wood / MDF</option>
+            <option value="alu" data-i18n="calc_mat2">Aluminium</option>
+            <option value="pla" data-i18n="calc_mat3">Plastics / acrylic</option>
           </select>
         </div>
         <div class="form-row">
           <div class="form-group">
-            <label class="form-label">Breedte (mm)</label>
+            <label class="form-label" data-i18n="calc_width">Width (mm)</label>
             <input type="number" class="form-input" id="width" value="500" min="10" max="2440" oninput="calcPrice()">
           </div>
           <div class="form-group">
-            <label class="form-label">Lengte (mm)</label>
+            <label class="form-label" data-i18n="calc_length">Length (mm)</label>
             <input type="number" class="form-input" id="height" value="500" min="10" max="1220" oninput="calcPrice()">
           </div>
         </div>
         <div class="form-group">
-          <label class="form-label">Dikte materiaal (mm)</label>
+          <label class="form-label" data-i18n="calc_thick">Material thickness (mm)</label>
           <input type="number" class="form-input" id="thickness" value="18" min="1" max="200" oninput="calcPrice()">
         </div>
         <div class="form-group">
-          <label class="form-label">Bewerking</label>
+          <label class="form-label" data-i18n="calc_op">Operation</label>
           <select class="form-select" id="op" onchange="calcPrice()">
-            <option value="outline">Uitsnijden / contour</option>
-            <option value="pocket">Pocketfrezen</option>
-            <option value="engrave">Graveren</option>
-            <option value="3d">3D-frezen</option>
+            <option value="outline" data-i18n="calc_op1">Profiling / contour</option>
+            <option value="pocket"  data-i18n="calc_op2">Pocketing</option>
+            <option value="engrave" data-i18n="calc_op3">Engraving</option>
+            <option value="3d"      data-i18n="calc_op4">3D milling</option>
           </select>
         </div>
         <div class="form-group">
-          <label class="form-label">Aantal stuks</label>
+          <label class="form-label" data-i18n="calc_qty">Quantity</label>
           <input type="number" class="form-input" id="qty" value="1" min="1" max="500" oninput="calcPrice()">
         </div>
         <div class="form-group">
-          <label class="form-label">Bezorging</label>
+          <label class="form-label" data-i18n="calc_del">Delivery</label>
           <select class="form-select" id="delivery" onchange="calcPrice()">
-            <option value="no">Zelf ophalen</option>
-            <option value="yes">Lokale bezorging (regio Gardemoen)</option>
+            <option value="no"  data-i18n="calc_del1">Self collection</option>
+            <option value="yes" data-i18n="calc_del2">Local delivery (Gardermoen region)</option>
           </select>
         </div>
         <div class="form-group">
-          <label class="form-label">Extra: tekenhulp nodig?</label>
+          <label class="form-label" data-i18n="calc_draw">Drawing support needed?</label>
           <select class="form-select" id="drawing" onchange="calcPrice()">
-            <option value="no">Nee, ik lever een klaar bestand aan</option>
-            <option value="simple">Ja — eenvoudige aanpassing</option>
-            <option value="full">Ja — volledig tekenen vanaf schets</option>
+            <option value="no"     data-i18n="calc_draw1">No, I will supply a ready file</option>
+            <option value="simple" data-i18n="calc_draw2">Yes — minor adjustment</option>
+            <option value="full"   data-i18n="calc_draw3">Yes — full drawing from sketch</option>
           </select>
         </div>
       </div>
+
+      <!-- Prijsresultaat -->
       <div class="price-result">
-        <h3 style="margin-bottom:1rem">Indicatieve prijs</h3>
+        <h3 style="margin-bottom:1rem" data-i18n="price_title">Indicative price</h3>
         <div id="priceLines"></div>
         <div class="price-total">
           <div class="big-price" id="totalPrice">€ —</div>
-          <div class="price-note">excl. BTW · indicatief</div>
+          <div class="price-note" data-i18n="price_vat">excl. VAT · indicative</div>
         </div>
-        <p style="font-size:.78rem;color:var(--text-secondary);margin-top:1rem;line-height:1.5">Vul alle velden in voor een indicatie. Definitieve prijs na bestandscheck door ons team.</p>
-        <a href="mailto:info@cencworks.no" class="btn-primary" style="width:100%;margin-top:1rem;text-align:center;display:block">Offerte aanvragen</a>
+        <p style="font-size:.78rem;color:var(--text-secondary);margin-top:1rem;line-height:1.5"
+           data-i18n="price_note">Fill in all fields for an estimate.</p>
+        <a href="mailto:info@cencworks.no" class="btn-primary"
+           style="width:100%;margin-top:1rem;text-align:center;display:block"
+           data-i18n="price_cta">Request quote</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SCHETS AANLEVEREN -->
-<section id="schets" class="upload-section">
+<!-- ==================== SCHETS AANLEVEREN ==================== -->
+<section id="sketch" class="upload-section">
   <div class="section-inner">
-    <p class="section-label">Schets aanleveren</p>
-    <h2>Van idee naar CNC-bestand</h2>
+    <p class="section-label" data-i18n="sketch_label">Submit sketch</p>
+    <h2 data-i18n="sketch_h2">From idea to CNC file</h2>
     <div class="upload-grid">
+
+      <!-- Stappenlijst -->
       <div>
-        <p style="color:var(--text-secondary);margin-top:.75rem;font-size:.9rem;max-width:40ch">Geen technische tekening? Geen probleem. Lever jouw schets in en ons team converteert deze naar een machinaal bestand.</p>
+        <p style="color:var(--text-secondary);margin-top:.75rem;font-size:.9rem;max-width:40ch"
+           data-i18n="sketch_intro">No technical drawing? No problem.</p>
         <ul class="upload-steps">
           <li>
             <div class="step-num">1</div>
             <div class="step-text">
-              <h4>Upload jouw schets</h4>
-              <p>Foto, scan, PDF of handtekening — elk formaat is welkom.</p>
+              <h4 data-i18n="step1_h">Upload your sketch</h4>
+              <p  data-i18n="step1_p">Any format is welcome.</p>
             </div>
           </li>
           <li>
             <div class="step-num">2</div>
             <div class="step-text">
-              <h4>Wij beoordelen de opdracht</h4>
-              <p>Binnen 24u krijg je terugkoppeling en een prijsindicatie voor de tekenwerkzaamheden.</p>
+              <h4 data-i18n="step2_h">We assess the job</h4>
+              <p  data-i18n="step2_p">Within 24 h you receive feedback.</p>
             </div>
           </li>
           <li>
             <div class="step-num">3</div>
             <div class="step-text">
-              <h4>Goedkeuring & productie</h4>
-              <p>Na jouw akkoord op het CAD-bestand starten wij direct met frezen.</p>
+              <h4 data-i18n="step3_h">Approval & production</h4>
+              <p  data-i18n="step3_p">We start milling after your approval.</p>
             </div>
           </li>
           <li>
             <div class="step-num">4</div>
             <div class="step-text">
-              <h4>Toekomstig: directe AI-conversie</h4>
-              <p>Wij werken aan geautomatiseerde schets-naar-DXF conversie. Binnenkort beschikbaar.</p>
+              <h4 data-i18n="step4_h">Coming soon: AI conversion</h4>
+              <p  data-i18n="step4_p">Automated sketch-to-DXF. Available soon.</p>
             </div>
           </li>
         </ul>
       </div>
+
+      <!-- Upload formulier -->
       <div>
         <div class="upload-zone" onclick="document.getElementById('fileInput').click()">
-          <i class="ti ti-cloud-upload"></i>
-          <p>Sleep je bestand hierheen of klik om te uploaden</p>
-          <small>JPG, PNG, PDF, DXF, SVG · max 20MB</small>
+          <i class="ti ti-cloud-upload" aria-hidden="true"></i>
+          <p  data-i18n="upload_zone">Drop your file here or click to upload</p>
+          <small data-i18n="upload_types">JPG, PNG, PDF, DXF, SVG · max 20 MB</small>
         </div>
-        <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.pdf,.dxf,.svg" style="display:none" onchange="handleFile(this)">
+        <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.pdf,.dxf,.svg"
+               style="display:none" onchange="handleFile(this)">
         <div id="fileStatus" style="margin-top:1rem;font-size:.85rem;color:var(--text-secondary)"></div>
         <div class="form-group" style="margin-top:1.25rem">
-          <label class="form-label">Toelichting op de schets</label>
-          <textarea class="form-input" rows="4" placeholder="Beschrijf materiaal, afmetingen, bijzonderheden..." style="resize:vertical"></textarea>
+          <label class="form-label" data-i18n="sketch_note">Notes on the sketch</label>
+          <textarea class="form-input" id="sketchNote" rows="4" style="resize:vertical"
+                    data-i18n-placeholder="sketch_ph"
+                    placeholder="Describe material, dimensions, special requirements..."></textarea>
         </div>
-        <a href="mailto:info@cencworks.no" class="btn-primary" style="width:100%;margin-top:.5rem;text-align:center;display:block">Schets insturen</a>
+        <a href="mailto:info@cencworks.no" class="btn-primary"
+           style="width:100%;margin-top:.5rem;text-align:center;display:block"
+           data-i18n="sketch_cta">Send sketch</a>
       </div>
+
     </div>
   </div>
 </section>
 
-<!-- OVER ONS -->
-<section id="over">
+<!-- ==================== OVER ONS ==================== -->
+<section id="about" class="contour-bg">
   <div class="section-inner">
     <div class="over-grid">
+
       <div>
-        <p class="section-label">Over ons</p>
-        <h2>Lokale precisie,<br>persoonlijk contact</h2>
-        <p style="color:var(--text-secondary);margin-top:1.25rem;font-size:.95rem;max-width:42ch">Gevestigd in de regio Gardemoen, actief voor zowel particulieren als bedrijven in de maakindustrie. Wij combineren machinale precisie met persoonlijk meedenken.</p>
+        <p class="section-label" data-i18n="about_label">About us</p>
+        <h2 data-i18n-html="about_h2">Local precision,<br>personal service</h2>
+        <p style="color:var(--text-secondary);margin-top:1.25rem;font-size:.95rem;max-width:42ch"
+           data-i18n="about_p">Based in the Gardermoen region.</p>
         <div class="about-stats">
           <div class="stat-box">
             <div class="stat-num">3000</div>
-            <div class="stat-lbl">Multicam model</div>
+            <div class="stat-lbl" data-i18n="stat1_lbl">Multicam model</div>
           </div>
           <div class="stat-box">
             <div class="stat-num">±0.1mm</div>
-            <div class="stat-lbl">Nauwkeurigheid</div>
+            <div class="stat-lbl" data-i18n="stat2_lbl">Accuracy</div>
           </div>
           <div class="stat-box">
             <div class="stat-num">3</div>
-            <div class="stat-lbl">Materialen</div>
+            <div class="stat-lbl" data-i18n="stat3_lbl">Materials</div>
           </div>
           <div class="stat-box">
-            <div class="stat-num">24u</div>
-            <div class="stat-lbl">Responstijd</div>
+            <div class="stat-num">24h</div>
+            <div class="stat-lbl" data-i18n="stat4_lbl">Response time</div>
           </div>
         </div>
       </div>
+
+      <!-- Contactkaart -->
       <div class="contact-card">
-        <h3 style="margin-bottom:1.25rem">Contact & locatie</h3>
+        <h3 style="margin-bottom:1.25rem" data-i18n="contact_title">Contact & location</h3>
         <div class="contact-row">
-          <i class="ti ti-map-pin"></i>
+          <i class="ti ti-map-pin" aria-hidden="true"></i>
           <div>
-            <p class="contact-lbl">Adres</p>
-            <p class="contact-val">Regio Gardemoen, Noorwegen</p>
+            <p class="contact-lbl" data-i18n="c_address_lbl">Address</p>
+            <p class="contact-val" data-i18n="c_address_val">Gardermoen region, Norway</p>
           </div>
         </div>
         <div class="contact-row">
-          <i class="ti ti-mail"></i>
+          <i class="ti ti-mail" aria-hidden="true"></i>
           <div>
-            <p class="contact-lbl">E-mail</p>
+            <p class="contact-lbl" data-i18n="c_email_lbl">E-mail</p>
             <p class="contact-val">info@cencworks.no</p>
           </div>
         </div>
         <div class="contact-row">
-          <i class="ti ti-phone"></i>
+          <i class="ti ti-phone" aria-hidden="true"></i>
           <div>
-            <p class="contact-lbl">Telefoon</p>
+            <p class="contact-lbl" data-i18n="c_phone_lbl">Phone</p>
             <p class="contact-val">+47 000 00 000</p>
           </div>
         </div>
         <div class="contact-row">
-          <i class="ti ti-clock"></i>
+          <i class="ti ti-clock" aria-hidden="true"></i>
           <div>
-            <p class="contact-lbl">Openingstijden</p>
-            <p class="contact-val">Ma–Vr 08:00–17:00</p>
+            <p class="contact-lbl" data-i18n="c_hours_lbl">Opening hours</p>
+            <p class="contact-val" data-i18n="c_hours_val">Mon–Fri 08:00–17:00</p>
           </div>
         </div>
         <div class="contact-row">
-          <i class="ti ti-truck-delivery"></i>
+          <i class="ti ti-truck-delivery" aria-hidden="true"></i>
           <div>
-            <p class="contact-lbl">Bezorggebied</p>
-            <p class="contact-val">Gardemoen & omgeving</p>
+            <p class="contact-lbl" data-i18n="c_area_lbl">Delivery area</p>
+            <p class="contact-val" data-i18n="c_area_val">Gardermoen & surroundings</p>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
 
-<!-- ROADMAP -->
+<!-- ==================== ROADMAP ==================== -->
 <section class="roadmap-section">
   <div class="section-inner">
-    <p class="section-label">Op de planning</p>
-    <h2>Roadmap</h2>
+    <p class="section-label" data-i18n="road_label">Upcoming</p>
+    <h2 data-i18n="road_h2">Roadmap</h2>
     <div class="roadmap-grid">
+
       <div class="roadmap-card">
-        <p class="roadmap-phase">Fase 1</p>
-        <h3>Doelgroep bepalen</h3>
-        <p>Particulier of industrieel? Analyse van de vraag rondom de Gardemoen-regio en omgeving.</p>
-        <span class="roadmap-status status-open">In kaart brengen</span>
+        <p class="roadmap-phase" data-i18n="r1_phase">Phase 1</p>
+        <h3 data-i18n="r1_h">Define target audience</h3>
+        <p  data-i18n="r1_p">Private or industrial?</p>
+        <span class="roadmap-status status-open" data-i18n="r1_s">Mapping</span>
       </div>
       <div class="roadmap-card">
-        <p class="roadmap-phase">Fase 2</p>
-        <h3>Industriële markt</h3>
-        <p>Aanspreken van de maakindustrie rondom Gardemoen — logistiek, luchtvaart, bouw & interieur.</p>
-        <span class="roadmap-status status-research">Uitzoeken</span>
+        <p class="roadmap-phase" data-i18n="r2_phase">Phase 2</p>
+        <h3 data-i18n="r2_h">Industrial market</h3>
+        <p  data-i18n="r2_p">Reaching companies near Gardermoen.</p>
+        <span class="roadmap-status status-research" data-i18n="r2_s">Research</span>
       </div>
       <div class="roadmap-card">
-        <p class="roadmap-phase">Fase 3</p>
-        <h3>Maatwerk-catalogus</h3>
-        <p>Vaste maatwerk-concepten uitwerken: ideepakketten met vaste prijzen voor veelgevraagd maatwerk.</p>
-        <span class="roadmap-status status-research">Concept</span>
+        <p class="roadmap-phase" data-i18n="r3_phase">Phase 3</p>
+        <h3 data-i18n="r3_h">Custom catalogue</h3>
+        <p  data-i18n="r3_p">Fixed concept packages with set prices.</p>
+        <span class="roadmap-status status-research" data-i18n="r3_s">Concept</span>
       </div>
       <div class="roadmap-card">
-        <p class="roadmap-phase">Fase 4</p>
-        <h3>Standaard werkzaamheden</h3>
-        <p>Gestandaardiseerde diensten met directe prijslijst — eenvoudig bestelbaar zonder offerte.</p>
-        <span class="roadmap-status status-research">Later</span>
+        <p class="roadmap-phase" data-i18n="r4_phase">Phase 4</p>
+        <h3 data-i18n="r4_h">Standard services</h3>
+        <p  data-i18n="r4_p">Direct price list, no quote needed.</p>
+        <span class="roadmap-status status-research" data-i18n="r4_s">Later</span>
       </div>
+
     </div>
   </div>
 </section>
 
+<!-- ==================== FOOTER ==================== -->
 <footer>
   <div class="footer-inner">
     <p class="footer-logo">CenC<span>.</span></p>
-    <p>Multicam 3000 · Gardemoen regio · Hout · Aluminium · Kunststof</p>
-    <p style="margin-top:.5rem">© 2025 CenC — Alle rechten voorbehouden</p>
+    <p data-i18n="footer_sub">Multicam 3000 · Gardermoen region · Wood · Aluminium · Plastics</p>
+    <p style="margin-top:.5rem" data-i18n="footer_copy">© 2025 CenC — All rights reserved</p>
   </div>
 </footer>
 
+<!-- ==================== TAALBESTANDEN ====================
+     Om een taal te verwijderen:
+       1. Verwijder de <script> regel hieronder
+       2. Verwijder de <option> in de taalknop bovenaan
+-->
+<script src="lang/en.js"></script>
+<script src="lang/nl.js"></script>
+<script src="lang/no.js"></script>
+
+<!-- ==================== JAVASCRIPT ==================== -->
 <script>
-/* Prijscalculator */
-var rates={mdf:{mat:.8,time:60},alu:{mat:3.5,time:120},pla:{mat:2.2,time:80}};
-var opMult={outline:1,pocket:1.5,engrave:1.2,'3d':2.2};
-var drawCost={no:0,simple:45,full:150};
-var hourRate=95;
+/* -----------------------------------------------
+   INSTELLINGEN — pas hier aan voor andere standaard
+----------------------------------------------- */
+var DEFAULT_LANG = 'en'; // Verander naar 'nl' of 'no' voor andere standaardtaal
 
-function calcPrice(){
-  var mat=document.getElementById('mat').value;
-  var w=parseFloat(document.getElementById('width').value)||0;
-  var h=parseFloat(document.getElementById('height').value)||0;
-  var t=parseFloat(document.getElementById('thickness').value)||0;
-  var op=document.getElementById('op').value;
-  var qty=parseInt(document.getElementById('qty').value)||1;
-  var delivery=document.getElementById('delivery').value;
-  var drawing=document.getElementById('drawing').value;
-  if(!w||!h||!t){document.getElementById('totalPrice').textContent='€ —';document.getElementById('priceLines').innerHTML='';return}
-  var area=w*h/1000000;
-  var matCost=area*t*rates[mat].mat;
-  var machineMin=(rates[mat].time*area)*opMult[op];
-  var machineCost=(machineMin/60)*hourRate;
-  var setupCost=qty<5?35:qty<20?20:10;
-  var perPieceCost=(matCost+machineCost+setupCost/qty)*qty;
-  var delCost=delivery==='yes'?25:0;
-  var drawTotal=drawCost[drawing];
-  var total=perPieceCost+delCost+drawTotal;
-  var lines=[
-    ['Materiaalkosten','€ '+matCost.toFixed(2)],
-    ['Bewerkingstijd','€ '+machineCost.toFixed(2)],
-    ['Setup & voorbereiding','€ '+setupCost.toFixed(2)],
-    qty>1?['Stuks','× '+qty]:null,
-    drawing!=='no'?['Tekenwerkzaamheden','€ '+drawTotal.toFixed(2)]:null,
-    delivery==='yes'?['Bezorging','€ '+delCost.toFixed(2)]:null,
-    ['Totaal indicatie','€ '+total.toFixed(2)]
-  ].filter(Boolean);
-  document.getElementById('priceLines').innerHTML=lines.map(function(l,i){
-    return '<div class="price-line"'+(i===lines.length-1?' style="font-weight:500"':'')+'>'+
-      '<span>'+l[0]+'</span><span class="price-mono">'+l[1]+'</span></div>';
-  }).join('');
-  document.getElementById('totalPrice').textContent='€ '+total.toFixed(2);
+/* Map van taalcode naar window.LANG_XX object */
+var LANGS = {
+  en: window.LANG_EN,
+  nl: window.LANG_NL,
+  no: window.LANG_NO,
+};
+
+/* -----------------------------------------------
+   VERTAALFUNCTIE
+   Doorloopt alle data-i18n attributen en vervangt tekst
+----------------------------------------------- */
+function applyLang(code) {
+  var t = LANGS[code];
+  if (!t) return;
+
+  /* Normale tekst-attributen */
+  document.querySelectorAll('[data-i18n]').forEach(function(el) {
+    var key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.textContent = t[key];
+  });
+
+  /* HTML-attributen (bijv. voor <em> in h1) */
+  document.querySelectorAll('[data-i18n-html]').forEach(function(el) {
+    var key = el.getAttribute('data-i18n-html');
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+
+  /* Placeholder-attributen (tekstgebieden) */
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el) {
+    var key = el.getAttribute('data-i18n-placeholder');
+    if (t[key] !== undefined) el.placeholder = t[key];
+  });
+
+  /* HTML lang-attribuut aanpassen voor toegankelijkheid */
+  document.documentElement.lang = code;
+
+  /* Keuze opslaan voor volgende bezoek */
+  localStorage.setItem('lang', code);
 }
 
-function handleFile(input){
-  var f=input.files[0];
-  if(f){document.getElementById('fileStatus').textContent='✓ '+f.name+' ('+(f.size/1024).toFixed(0)+' KB) — klaar om in te sturen';}
-}
-
-/* Dark/light toggle */
-var toggle=document.getElementById('themeToggle');
-var html=document.documentElement;
-var saved=localStorage.getItem('theme')||'light';
-html.setAttribute('data-theme',saved);
-toggle.textContent=saved==='dark'?'☀️':'🌙';
-
-toggle.addEventListener('click',function(){
-  var current=html.getAttribute('data-theme');
-  var next=current==='dark'?'light':'dark';
-  html.setAttribute('data-theme',next);
-  toggle.textContent=next==='dark'?'☀️':'🌙';
-  localStorage.setItem('theme',next);
+/* -----------------------------------------------
+   TAALKNOP — luisteren naar wijzigingen
+----------------------------------------------- */
+var langSelect = document.getElementById('langSelect');
+langSelect.addEventListener('change', function() {
+  applyLang(this.value);
+  calcPrice(); /* Prijslijst hertalen na taalwissel */
 });
 
+/* Herstel opgeslagen taal of gebruik standaard */
+var savedLang = localStorage.getItem('lang') || DEFAULT_LANG;
+langSelect.value = savedLang;
+applyLang(savedLang);
+
+/* -----------------------------------------------
+   THEMA TOGGLE — dark/light
+----------------------------------------------- */
+var themeToggle = document.getElementById('themeToggle');
+var html = document.documentElement;
+var savedTheme = localStorage.getItem('theme') || 'light';
+html.setAttribute('data-theme', savedTheme);
+themeToggle.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+
+themeToggle.addEventListener('click', function() {
+  var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  themeToggle.textContent = next === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('theme', next);
+});
+
+/* -----------------------------------------------
+   PRIJSCALCULATOR
+   Tarieven per materiaal en bewerking
+----------------------------------------------- */
+var rates   = { mdf:{mat:.8,time:60}, alu:{mat:3.5,time:120}, pla:{mat:2.2,time:80} };
+var opMult  = { outline:1, pocket:1.5, engrave:1.2, '3d':2.2 };
+var drawCost= { no:0, simple:45, full:150 };
+var hourRate= 95;
+
+function calcPrice() {
+  var t        = LANGS[langSelect.value] || LANGS[DEFAULT_LANG];
+  var mat      = document.getElementById('mat').value;
+  var w        = parseFloat(document.getElementById('width').value)     || 0;
+  var h        = parseFloat(document.getElementById('height').value)    || 0;
+  var thick    = parseFloat(document.getElementById('thickness').value) || 0;
+  var op       = document.getElementById('op').value;
+  var qty      = parseInt(document.getElementById('qty').value)         || 1;
+  var delivery = document.getElementById('delivery').value;
+  var drawing  = document.getElementById('drawing').value;
+
+  /* Wacht op volledige invoer */
+  if (!w || !h || !thick) {
+    document.getElementById('totalPrice').textContent = '€ —';
+    document.getElementById('priceLines').innerHTML = '';
+    return;
+  }
+
+  /* Berekeningen */
+  var area       = w * h / 1000000;
+  var matCost    = area * thick * rates[mat].mat;
+  var machMin    = rates[mat].time * area * opMult[op];
+  var machCost   = (machMin / 60) * hourRate;
+  var setupCost  = qty < 5 ? 35 : qty < 20 ? 20 : 10;
+  var total      = (matCost + machCost + setupCost / qty) * qty
+                 + (delivery === 'yes' ? 25 : 0)
+                 + drawCost[drawing];
+
+  /* Opbouw prijsregels met vertaalde labels */
+  var lines = [
+    [t.price_mat,      '€ ' + matCost.toFixed(2)],
+    [t.price_machine,  '€ ' + machCost.toFixed(2)],
+    [t.price_setup,    '€ ' + setupCost.toFixed(2)],
+    qty > 1              ? [t.price_qty,     '× ' + qty]        : null,
+    drawing !== 'no'     ? [t.price_drawing, '€ ' + drawCost[drawing].toFixed(2)] : null,
+    delivery === 'yes'   ? [t.price_delivery,'€ 25.00']         : null,
+    [t.price_total,    '€ ' + total.toFixed(2)],
+  ].filter(Boolean);
+
+  document.getElementById('priceLines').innerHTML = lines.map(function(l, i) {
+    var bold = i === lines.length - 1 ? ' style="font-weight:500"' : '';
+    return '<div class="price-line"' + bold + '>'
+         + '<span>' + l[0] + '</span>'
+         + '<span class="price-mono">' + l[1] + '</span>'
+         + '</div>';
+  }).join('');
+
+  document.getElementById('totalPrice').textContent = '€ ' + total.toFixed(2);
+}
+
+/* -----------------------------------------------
+   BESTAND UPLOAD — bestandsnaam tonen
+----------------------------------------------- */
+function handleFile(input) {
+  var f = input.files[0];
+  if (f) {
+    document.getElementById('fileStatus').textContent =
+      '✓ ' + f.name + ' (' + (f.size / 1024).toFixed(0) + ' KB)';
+  }
+}
+
+/* Initialiseer calculator bij laden */
 calcPrice();
 </script>
+
 </body>
 </html>
