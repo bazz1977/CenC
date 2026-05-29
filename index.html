@@ -1,160 +1,18 @@
 <!DOCTYPE html>
-<html lang="nl">
+<!-- index.html v1.1 — dark theme toggle, Jost font, externe CSS -->
+<html lang="nl" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CenC — CNC Bewerkingen Gardemoen</title>
-<!-- index.html v1.0 — initiële release -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --white:#fff;
-  --black:#0d0d0d;
-  --gray-50:#f7f7f5;
-  --gray-100:#eeecea;
-  --gray-300:#c8c6c0;
-  --gray-500:#8a8880;
-  --gray-700:#4a4845;
-  --accent:#1a1a1a;
-  --accent2:#d4a853;
-  --accent2-light:#fdf3dc;
-  --radius:8px;
-  --radius-lg:14px;
-}
-body{font-family:'DM Sans',sans-serif;color:var(--black);background:var(--white);font-size:15px;line-height:1.65;overflow-x:hidden}
-h1{font-size:clamp(2.4rem,5vw,4rem);font-weight:300;line-height:1.1;letter-spacing:-0.03em}
-h2{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:300;letter-spacing:-0.02em}
-h3{font-size:1.1rem;font-weight:500}
-
-nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:0.5px solid var(--gray-100);padding:0 2rem}
-.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
-.nav-logo{font-family:'DM Mono',monospace;font-size:1rem;font-weight:500;letter-spacing:.04em;color:var(--black);text-decoration:none}
-.nav-logo span{color:var(--accent2)}
-.nav-links{display:flex;gap:2rem;list-style:none}
-.nav-links a{font-size:.85rem;color:var(--gray-700);text-decoration:none;letter-spacing:.02em;transition:color .2s}
-.nav-links a:hover{color:var(--black)}
-.nav-cta{background:var(--black);color:var(--white);border:none;padding:.55rem 1.2rem;border-radius:var(--radius);font-family:'DM Sans',sans-serif;font-size:.85rem;cursor:pointer;transition:opacity .2s}
-.nav-cta:hover{opacity:.8}
-
-.hero{min-height:88vh;display:flex;align-items:center;padding:5rem 2rem 4rem;background:var(--gray-50);position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;right:-5%;top:15%;width:55%;height:70%;background:var(--gray-100);border-radius:50% 40% 60% 30%;opacity:.5}
-.hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;position:relative}
-.hero-sub{font-family:'DM Mono',monospace;font-size:.78rem;color:var(--accent2);letter-spacing:.12em;text-transform:uppercase;margin-bottom:1.5rem}
-.hero h1 em{font-style:normal;border-bottom:2px solid var(--accent2);padding-bottom:2px}
-.hero-desc{color:var(--gray-500);margin:1.5rem 0 2.5rem;font-size:1rem;max-width:38ch}
-.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
-.btn-primary{background:var(--black);color:var(--white);border:none;padding:.8rem 1.8rem;border-radius:var(--radius);font-family:'DM Sans',sans-serif;font-size:.9rem;cursor:pointer;transition:opacity .2s;text-decoration:none;display:inline-block}
-.btn-primary:hover{opacity:.8}
-.btn-secondary{background:transparent;color:var(--black);border:1px solid var(--gray-300);padding:.8rem 1.8rem;border-radius:var(--radius);font-family:'DM Sans',sans-serif;font-size:.9rem;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block}
-.btn-secondary:hover{border-color:var(--black)}
-.hero-machine{background:var(--white);border:0.5px solid var(--gray-300);border-radius:var(--radius-lg);padding:2rem;display:flex;flex-direction:column;gap:1rem}
-.machine-tag{font-family:'DM Mono',monospace;font-size:.75rem;color:var(--gray-500);letter-spacing:.06em}
-.machine-name{font-size:1.4rem;font-weight:500}
-.machine-specs{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:.5rem}
-.spec-item{background:var(--gray-50);border-radius:var(--radius);padding:.75rem}
-.spec-label{font-size:.72rem;color:var(--gray-500);font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.06em}
-.spec-val{font-size:1rem;font-weight:500;margin-top:.2rem}
-.machine-materials{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem}
-.mat-pill{font-size:.78rem;background:var(--gray-100);color:var(--gray-700);padding:.3rem .8rem;border-radius:20px}
-
-section{padding:6rem 2rem}
-.section-inner{max-width:1200px;margin:0 auto}
-.section-label{font-family:'DM Mono',monospace;font-size:.75rem;color:var(--accent2);letter-spacing:.12em;text-transform:uppercase;margin-bottom:1rem}
-
-.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
-.service-card{border:0.5px solid var(--gray-300);border-radius:var(--radius-lg);padding:2rem;transition:border-color .2s,transform .2s;cursor:default}
-.service-card:hover{border-color:var(--black);transform:translateY(-2px)}
-.service-icon{font-size:1.8rem;color:var(--accent2);margin-bottom:1.2rem}
-.service-card h3{margin-bottom:.6rem}
-.service-card p{color:var(--gray-500);font-size:.9rem}
-
-.portfolio-section{background:var(--gray-50)}
-.portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:3rem;border:1px solid var(--gray-300);border-radius:var(--radius-lg);overflow:hidden}
-.portfolio-item{background:var(--white);padding:2.5rem 2rem;position:relative;overflow:hidden;transition:background .2s}
-.portfolio-item:hover{background:var(--gray-50)}
-.portfolio-item::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--accent2);transform:scaleX(0);transition:transform .3s;transform-origin:left}
-.portfolio-item:hover::after{transform:scaleX(1)}
-.portfolio-num{font-family:'DM Mono',monospace;font-size:.75rem;color:var(--gray-300);margin-bottom:1rem}
-.portfolio-item h3{font-size:1rem;margin-bottom:.4rem}
-.portfolio-item p{color:var(--gray-500);font-size:.85rem}
-.portfolio-mat{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--accent2);margin-top:.75rem}
-
-.calculator-section{border-top:0.5px solid var(--gray-100)}
-.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-top:3rem;align-items:start}
-.form-group{margin-bottom:1.25rem}
-.form-label{font-size:.82rem;color:var(--gray-700);font-weight:500;margin-bottom:.4rem;display:block}
-.form-input,.form-select{width:100%;padding:.65rem .9rem;border:0.5px solid var(--gray-300);border-radius:var(--radius);font-family:'DM Sans',sans-serif;font-size:.9rem;background:var(--white);color:var(--black);outline:none;transition:border-color .2s;-webkit-appearance:none;appearance:none}
-.form-input:focus,.form-select:focus{border-color:var(--black)}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-.price-result{background:var(--gray-50);border:0.5px solid var(--gray-300);border-radius:var(--radius-lg);padding:2rem;position:sticky;top:80px}
-.price-line{display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:0.5px solid var(--gray-100);font-size:.9rem}
-.price-line:last-child{border-bottom:none;font-weight:500;font-size:1rem;padding-top:.75rem}
-.price-mono{font-family:'DM Mono',monospace}
-.price-total{background:var(--black);color:var(--white);border-radius:var(--radius);padding:1.25rem;text-align:center;margin-top:1.25rem}
-.price-total .big-price{font-family:'DM Mono',monospace;font-size:1.8rem;font-weight:500}
-.price-note{font-size:.75rem;color:var(--gray-300);margin-top:.4rem}
-.upload-zone{border:1.5px dashed var(--gray-300);border-radius:var(--radius);padding:2rem;text-align:center;cursor:pointer;transition:border-color .2s;background:var(--gray-50)}
-.upload-zone:hover{border-color:var(--accent2)}
-.upload-zone i{font-size:2rem;color:var(--gray-300);display:block;margin-bottom:.5rem}
-.upload-zone p{color:var(--gray-500);font-size:.85rem}
-.upload-zone small{font-size:.75rem;color:var(--gray-300)}
-
-.upload-section{background:var(--gray-50)}
-.upload-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-top:3rem;align-items:start}
-.upload-steps{list-style:none;display:flex;flex-direction:column;gap:1.25rem;margin-top:2rem}
-.upload-steps li{display:flex;gap:1rem;align-items:flex-start}
-.step-num{font-family:'DM Mono',monospace;font-size:.75rem;background:var(--black);color:var(--white);width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem}
-.step-text h4{font-size:.9rem;font-weight:500}
-.step-text p{font-size:.82rem;color:var(--gray-500);margin-top:.2rem}
-
-.over-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
-.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2.5rem}
-.stat-box{border-left:2px solid var(--accent2);padding-left:1rem}
-.stat-num{font-size:2rem;font-weight:300;line-height:1}
-.stat-lbl{font-size:.8rem;color:var(--gray-500);margin-top:.25rem}
-.contact-card{background:var(--gray-50);border:0.5px solid var(--gray-300);border-radius:var(--radius-lg);padding:2.5rem}
-.contact-row{display:flex;gap:.75rem;align-items:flex-start;padding:.75rem 0;border-bottom:0.5px solid var(--gray-100)}
-.contact-row:last-child{border-bottom:none}
-.contact-row i{font-size:1.1rem;color:var(--accent2);margin-top:2px;flex-shrink:0}
-.contact-lbl{font-size:.78rem;color:var(--gray-500)}
-.contact-val{font-size:.9rem;font-weight:500}
-
-.roadmap-section{background:var(--black);color:var(--white)}
-.roadmap-section .section-label{color:var(--accent2)}
-.roadmap-section h2{color:var(--white)}
-.roadmap-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:3rem}
-.roadmap-card{border:0.5px solid rgba(255,255,255,.1);border-radius:var(--radius-lg);padding:1.75rem;position:relative;overflow:hidden}
-.roadmap-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent2);transform:scaleX(0);transition:transform .3s;transform-origin:left}
-.roadmap-card:hover::before{transform:scaleX(1)}
-.roadmap-phase{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--accent2);letter-spacing:.1em;margin-bottom:.75rem}
-.roadmap-card h3{font-size:.95rem;color:var(--white);margin-bottom:.5rem;font-weight:500}
-.roadmap-card p{font-size:.82rem;color:rgba(255,255,255,.45);line-height:1.55}
-.roadmap-status{display:inline-block;font-size:.7rem;font-family:'DM Mono',monospace;padding:.2rem .6rem;border-radius:20px;margin-top:1rem}
-.status-open{background:rgba(212,168,83,.15);color:var(--accent2)}
-.status-research{background:rgba(255,255,255,.05);color:rgba(255,255,255,.4)}
-
-footer{background:var(--gray-50);border-top:0.5px solid var(--gray-100);padding:3rem 2rem;text-align:center}
-.footer-inner{max-width:1200px;margin:0 auto}
-.footer-logo{font-family:'DM Mono',monospace;font-size:1.1rem;font-weight:500;margin-bottom:.5rem}
-.footer-logo span{color:var(--accent2)}
-footer p{font-size:.82rem;color:var(--gray-500)}
-
-@media(max-width:900px){
-  .hero-inner,.services-grid,.portfolio-grid,.calc-grid,.over-grid,.roadmap-grid,.upload-grid{grid-template-columns:1fr}
-  .portfolio-grid{border:none;display:flex;flex-direction:column;gap:.5rem}
-  .portfolio-item{border:0.5px solid var(--gray-300);border-radius:var(--radius)}
-  .nav-links{display:none}
-}
-</style>
 </head>
 <body>
 
 <nav>
   <div class="nav-inner">
-    <a href="#" class="nav-logo">CNC<span>.</span>WORKS</a>
+    <a href="#" class="nav-logo">CenC<span>.</span></a>
     <ul class="nav-links">
       <li><a href="#diensten">Diensten</a></li>
       <li><a href="#portfolio">Portfolio</a></li>
@@ -162,10 +20,14 @@ footer p{font-size:.82rem;color:var(--gray-500)}
       <li><a href="#schets">Schets aanleveren</a></li>
       <li><a href="#over">Over ons</a></li>
     </ul>
-    <button class="nav-cta" onclick="document.getElementById('prijs').scrollIntoView({behavior:'smooth'})">Bereken prijs</button>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Schakel thema">🌙</button>
+      <button class="nav-cta" onclick="document.getElementById('prijs').scrollIntoView({behavior:'smooth'})">Bereken prijs</button>
+    </div>
   </div>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
     <div>
@@ -212,6 +74,7 @@ footer p{font-size:.82rem;color:var(--gray-500)}
   </div>
 </section>
 
+<!-- DIENSTEN -->
 <section id="diensten">
   <div class="section-inner">
     <p class="section-label">Wat wij doen</p>
@@ -251,6 +114,7 @@ footer p{font-size:.82rem;color:var(--gray-500)}
   </div>
 </section>
 
+<!-- PORTFOLIO -->
 <section id="portfolio" class="portfolio-section">
   <div class="section-inner">
     <p class="section-label">Eerder werk</p>
@@ -296,11 +160,12 @@ footer p{font-size:.82rem;color:var(--gray-500)}
   </div>
 </section>
 
+<!-- PRIJSCALCULATOR -->
 <section id="prijs">
   <div class="section-inner">
     <p class="section-label">Prijsindicatie</p>
     <h2>Online rekentool</h2>
-    <p style="color:var(--gray-500);margin-top:.75rem;font-size:.9rem">Geef je opdracht in en ontvang direct een indicatieve prijs. Geen registratie nodig.</p>
+    <p style="color:var(--text-secondary);margin-top:.75rem;font-size:.9rem">Geef je opdracht in en ontvang direct een indicatieve prijs. Geen registratie nodig.</p>
     <div class="calc-grid">
       <div>
         <div class="form-group">
@@ -361,20 +226,21 @@ footer p{font-size:.82rem;color:var(--gray-500)}
           <div class="big-price" id="totalPrice">€ —</div>
           <div class="price-note">excl. BTW · indicatief</div>
         </div>
-        <p style="font-size:.78rem;color:var(--gray-500);margin-top:1rem;line-height:1.5">Vul alle velden in voor een indicatie. Definitieve prijs na bestandscheck door ons team.</p>
-        <a href="mailto:info@cncworks.no" class="btn-primary" style="width:100%;margin-top:1rem;text-align:center;display:block">Offerte aanvragen</a>
+        <p style="font-size:.78rem;color:var(--text-secondary);margin-top:1rem;line-height:1.5">Vul alle velden in voor een indicatie. Definitieve prijs na bestandscheck door ons team.</p>
+        <a href="mailto:info@cencworks.no" class="btn-primary" style="width:100%;margin-top:1rem;text-align:center;display:block">Offerte aanvragen</a>
       </div>
     </div>
   </div>
 </section>
 
+<!-- SCHETS AANLEVEREN -->
 <section id="schets" class="upload-section">
   <div class="section-inner">
     <p class="section-label">Schets aanleveren</p>
     <h2>Van idee naar CNC-bestand</h2>
     <div class="upload-grid">
       <div>
-        <p style="color:var(--gray-500);margin-top:.75rem;font-size:.9rem;max-width:40ch">Geen technische tekening? Geen probleem. Lever jouw schets in en ons team converteert deze naar een machinaal bestand.</p>
+        <p style="color:var(--text-secondary);margin-top:.75rem;font-size:.9rem;max-width:40ch">Geen technische tekening? Geen probleem. Lever jouw schets in en ons team converteert deze naar een machinaal bestand.</p>
         <ul class="upload-steps">
           <li>
             <div class="step-num">1</div>
@@ -413,24 +279,25 @@ footer p{font-size:.82rem;color:var(--gray-500)}
           <small>JPG, PNG, PDF, DXF, SVG · max 20MB</small>
         </div>
         <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.pdf,.dxf,.svg" style="display:none" onchange="handleFile(this)">
-        <div id="fileStatus" style="margin-top:1rem;font-size:.85rem;color:var(--gray-500)"></div>
+        <div id="fileStatus" style="margin-top:1rem;font-size:.85rem;color:var(--text-secondary)"></div>
         <div class="form-group" style="margin-top:1.25rem">
           <label class="form-label">Toelichting op de schets</label>
           <textarea class="form-input" rows="4" placeholder="Beschrijf materiaal, afmetingen, bijzonderheden..." style="resize:vertical"></textarea>
         </div>
-        <a href="mailto:info@cncworks.no" class="btn-primary" style="width:100%;margin-top:.5rem;text-align:center;display:block">Schets insturen</a>
+        <a href="mailto:info@cencworks.no" class="btn-primary" style="width:100%;margin-top:.5rem;text-align:center;display:block">Schets insturen</a>
       </div>
     </div>
   </div>
 </section>
 
+<!-- OVER ONS -->
 <section id="over">
   <div class="section-inner">
     <div class="over-grid">
       <div>
         <p class="section-label">Over ons</p>
         <h2>Lokale precisie,<br>persoonlijk contact</h2>
-        <p style="color:var(--gray-500);margin-top:1.25rem;font-size:.95rem;max-width:42ch">Gevestigd in de regio Gardemoen, actief voor zowel particulieren als bedrijven in de maakindustrie. Wij combineren machinale precisie met persoonlijk meedenken.</p>
+        <p style="color:var(--text-secondary);margin-top:1.25rem;font-size:.95rem;max-width:42ch">Gevestigd in de regio Gardemoen, actief voor zowel particulieren als bedrijven in de maakindustrie. Wij combineren machinale precisie met persoonlijk meedenken.</p>
         <div class="about-stats">
           <div class="stat-box">
             <div class="stat-num">3000</div>
@@ -463,7 +330,7 @@ footer p{font-size:.82rem;color:var(--gray-500)}
           <i class="ti ti-mail"></i>
           <div>
             <p class="contact-lbl">E-mail</p>
-            <p class="contact-val">info@cncworks.no</p>
+            <p class="contact-val">info@cencworks.no</p>
           </div>
         </div>
         <div class="contact-row">
@@ -492,6 +359,7 @@ footer p{font-size:.82rem;color:var(--gray-500)}
   </div>
 </section>
 
+<!-- ROADMAP -->
 <section class="roadmap-section">
   <div class="section-inner">
     <p class="section-label">Op de planning</p>
@@ -527,41 +395,39 @@ footer p{font-size:.82rem;color:var(--gray-500)}
 
 <footer>
   <div class="footer-inner">
-    <p class="footer-logo">CNC<span>.</span>WORKS</p>
+    <p class="footer-logo">CenC<span>.</span></p>
     <p>Multicam 3000 · Gardemoen regio · Hout · Aluminium · Kunststof</p>
-    <p style="margin-top:.5rem">© 2025 CNC.Works — Alle rechten voorbehouden</p>
+    <p style="margin-top:.5rem">© 2025 CenC — Alle rechten voorbehouden</p>
   </div>
 </footer>
 
 <script>
-const rates={mdf:{mat:.8,time:60},alu:{mat:3.5,time:120},pla:{mat:2.2,time:80}};
-const opMult={outline:1,pocket:1.5,engrave:1.2,'3d':2.2};
-const drawCost={no:0,simple:45,full:150};
-const hourRate=95;
+/* Prijscalculator */
+var rates={mdf:{mat:.8,time:60},alu:{mat:3.5,time:120},pla:{mat:2.2,time:80}};
+var opMult={outline:1,pocket:1.5,engrave:1.2,'3d':2.2};
+var drawCost={no:0,simple:45,full:150};
+var hourRate=95;
 
 function calcPrice(){
-  const mat=document.getElementById('mat').value;
-  const w=parseFloat(document.getElementById('width').value)||0;
-  const h=parseFloat(document.getElementById('height').value)||0;
-  const t=parseFloat(document.getElementById('thickness').value)||0;
-  const op=document.getElementById('op').value;
-  const qty=parseInt(document.getElementById('qty').value)||1;
-  const delivery=document.getElementById('delivery').value;
-  const drawing=document.getElementById('drawing').value;
-
+  var mat=document.getElementById('mat').value;
+  var w=parseFloat(document.getElementById('width').value)||0;
+  var h=parseFloat(document.getElementById('height').value)||0;
+  var t=parseFloat(document.getElementById('thickness').value)||0;
+  var op=document.getElementById('op').value;
+  var qty=parseInt(document.getElementById('qty').value)||1;
+  var delivery=document.getElementById('delivery').value;
+  var drawing=document.getElementById('drawing').value;
   if(!w||!h||!t){document.getElementById('totalPrice').textContent='€ —';document.getElementById('priceLines').innerHTML='';return}
-
-  const area=w*h/1000000;
-  const matCost=area*t*rates[mat].mat;
-  const machineMin=(rates[mat].time*area)*opMult[op];
-  const machineCost=(machineMin/60)*hourRate;
-  const setupCost=qty<5?35:qty<20?20:10;
-  const perPieceCost=(matCost+machineCost+setupCost/qty)*qty;
-  const delCost=delivery==='yes'?25:0;
-  const drawTotal=drawCost[drawing];
-  const total=perPieceCost+delCost+drawTotal;
-
-  const lines=[
+  var area=w*h/1000000;
+  var matCost=area*t*rates[mat].mat;
+  var machineMin=(rates[mat].time*area)*opMult[op];
+  var machineCost=(machineMin/60)*hourRate;
+  var setupCost=qty<5?35:qty<20?20:10;
+  var perPieceCost=(matCost+machineCost+setupCost/qty)*qty;
+  var delCost=delivery==='yes'?25:0;
+  var drawTotal=drawCost[drawing];
+  var total=perPieceCost+delCost+drawTotal;
+  var lines=[
     ['Materiaalkosten','€ '+matCost.toFixed(2)],
     ['Bewerkingstijd','€ '+machineCost.toFixed(2)],
     ['Setup & voorbereiding','€ '+setupCost.toFixed(2)],
@@ -570,7 +436,6 @@ function calcPrice(){
     delivery==='yes'?['Bezorging','€ '+delCost.toFixed(2)]:null,
     ['Totaal indicatie','€ '+total.toFixed(2)]
   ].filter(Boolean);
-
   document.getElementById('priceLines').innerHTML=lines.map(function(l,i){
     return '<div class="price-line"'+(i===lines.length-1?' style="font-weight:500"':'')+'>'+
       '<span>'+l[0]+'</span><span class="price-mono">'+l[1]+'</span></div>';
@@ -580,10 +445,23 @@ function calcPrice(){
 
 function handleFile(input){
   var f=input.files[0];
-  if(f){
-    document.getElementById('fileStatus').innerHTML='✓ '+f.name+' ('+(f.size/1024).toFixed(0)+' KB) — klaar om in te sturen';
-  }
+  if(f){document.getElementById('fileStatus').textContent='✓ '+f.name+' ('+(f.size/1024).toFixed(0)+' KB) — klaar om in te sturen';}
 }
+
+/* Dark/light toggle */
+var toggle=document.getElementById('themeToggle');
+var html=document.documentElement;
+var saved=localStorage.getItem('theme')||'light';
+html.setAttribute('data-theme',saved);
+toggle.textContent=saved==='dark'?'☀️':'🌙';
+
+toggle.addEventListener('click',function(){
+  var current=html.getAttribute('data-theme');
+  var next=current==='dark'?'light':'dark';
+  html.setAttribute('data-theme',next);
+  toggle.textContent=next==='dark'?'☀️':'🌙';
+  localStorage.setItem('theme',next);
+});
 
 calcPrice();
 </script>
