@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- index.html v2.0 — meertalig (EN/NL/NO), dark theme, contourlijnen achtergrond -->
+<!-- index.html v2.1 — puntengrid achtergrond, taalwisselbug opgelost -->
 <!--
   STANDAARDTAAL INSTELLEN:
   Zoek op: const DEFAULT_LANG = 'en'
@@ -34,6 +34,7 @@
 
     <div class="nav-right">
       <!-- Taalknop: om een taal te verwijderen, verwijder de <option> hieronder -->
+      <!-- Opties hebben GEEN data-i18n — de taalknop toont altijd de taalcode zelf -->
       <select class="lang-select" id="langSelect" aria-label="Language">
         <option value="en">EN</option>
         <option value="nl">NL</option>
@@ -492,10 +493,20 @@ function applyLang(code) {
   var t = LANGS[code];
   if (!t) return;
 
-  /* Normale tekst-attributen */
+  /* Normale tekst — sla <option> elementen over zodat <select> waarde intact blijft */
   document.querySelectorAll('[data-i18n]').forEach(function(el) {
+    if (el.tagName === 'OPTION') return; /* <option> nooit hertalen — breekt select.value */
     var key = el.getAttribute('data-i18n');
     if (t[key] !== undefined) el.textContent = t[key];
+  });
+
+  /* Opties in calculator-selects apart hertalen, value bewaren */
+  document.querySelectorAll('select[id] option[data-i18n]').forEach(function(opt) {
+    var key = opt.getAttribute('data-i18n');
+    var parent = opt.parentElement;
+    var savedVal = parent.value; /* waarde opslaan vóór hertaling */
+    if (t[key] !== undefined) opt.textContent = t[key];
+    parent.value = savedVal; /* waarde terugzetten ná hertaling */
   });
 
   /* HTML-attributen (bijv. voor <em> in h1) */
@@ -510,7 +521,7 @@ function applyLang(code) {
     if (t[key] !== undefined) el.placeholder = t[key];
   });
 
-  /* HTML lang-attribuut aanpassen voor toegankelijkheid */
+  /* HTML lang-attribuut voor toegankelijkheid */
   document.documentElement.lang = code;
 
   /* Keuze opslaan voor volgende bezoek */
